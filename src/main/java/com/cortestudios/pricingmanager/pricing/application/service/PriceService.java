@@ -3,7 +3,6 @@ package com.cortestudios.pricingmanager.pricing.application.service;
 import com.cortestudios.pricingmanager.pricing.application.usecase.GetPriceUseCase;
 import com.cortestudios.pricingmanager.pricing.application.usecase.GetManyPricesUseCase;
 import com.cortestudios.pricingmanager.pricing.domain.model.Price;
-import com.cortestudios.pricingmanager.pricing.infrastructure.dto.request.GetApplicablePriceFilterRequestDTO;
 import com.cortestudios.pricingmanager.pricing.infrastructure.dto.response.PriceResponseDTO;
 import com.cortestudios.pricingmanager.pricing.infrastructure.util.mapperimpl.PriceAndPriceResponseDTOMapper;
 import lombok.RequiredArgsConstructor;
@@ -22,22 +21,13 @@ public class PriceService {
 
     public List<PriceResponseDTO> getAllPricesByParams(final Long productId, final Long brandId, final Pageable pageable) {
         final List<Price> prices = getManyPricesUseCase.getAllPricesByParams(productId, brandId, pageable).toList();
-
         return prices.stream()
                 .map(priceAndPriceResponseDTOMapper::map)
                 .toList();
     }
 
-    public PriceResponseDTO getApplicablePrice(final GetApplicablePriceFilterRequestDTO getApplicablePriceFilterRequestDTO) {
-        final Long productId = getApplicablePriceFilterRequestDTO.getProductId();
-        final Long brandId = getApplicablePriceFilterRequestDTO.getBrandId();
-        final LocalDateTime applicationDateTime = LocalDateTime.of(
-                getApplicablePriceFilterRequestDTO.getApplicationDate(),
-                getApplicablePriceFilterRequestDTO.getApplicationTime()
-        );
-
-        final Price price = getPriceUseCase.getApplicablePrice(productId, brandId, applicationDateTime);
-
+    public PriceResponseDTO getApplicablePrice(Long productId, Long brandId, LocalDateTime applicationDate) {
+        final Price price = getPriceUseCase.getApplicablePrice(productId, brandId, applicationDate);
         return priceAndPriceResponseDTOMapper.map(price);
     }
 }

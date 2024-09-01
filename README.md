@@ -1,5 +1,5 @@
 # Pricing Manager
-
+![Java version](https://img.shields.io/badge/JDK-17%20-blue)
 ## Project Overview
 
 The **Pricing Manager** project is a demonstration of a simple pricing service application. The service applies business rules to determine the correct price of a product based on various criteria, such as the date, time, brand, and priority of price offers. The application showcases the following business rules:
@@ -47,7 +47,6 @@ The project is structured as follows:
 │    │   │               │       │   └───rest
 │    │   │               │       ├───config
 │    │   │               │       ├───dto
-│    │   │               │       │   ├───request
 │    │   │               │       │   └───response
 │    │   │               │       ├───exception
 │    │   │               │       └───util
@@ -77,6 +76,8 @@ The project is structured as follows:
 │            └── docs                                               # HTTP request examples and documentation
 │
 ├── .gitignore                                                      # Git ignore file
+├── .env                                                            # The file enviroment you should create
+├── checkstyle.xml                                                  # File to enforce simple code style
 ├── Dockerfile                                                      # Docker configuration for building and running the application
 ├── docker-compose.yml                                              # Docker Compose configuration
 └── README.md                                                       # Project documentation (this file)
@@ -147,6 +148,9 @@ This command will build the Docker image, start the application, and set up an H
 
 ## Accessing the Application:
 Once the application is running, you can access it via your web browser at:
-[http://localhost:8080](http://localhost:8080)
+[http://localhost:8080/api-docs](http://localhost:8080)
 
 Replace 8080 with the appropriate port if you've configured a different one in your .env file.
+You will see the Swagger UI, where you can test the API endpoints and view the documentation.
+
+![Image ApiDocs Example](/docs/images/api-docs.png)
