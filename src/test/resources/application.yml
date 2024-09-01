@@ -1,0 +1,40 @@
+spring:
+    application:
+        name: pricing-manager
+    profiles:
+        active: test
+    datasource:
+        url: jdbc:h2:mem:test_db_test;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+        username: dev
+        password: ''
+        driver-class-name: org.h2.Driver
+    jpa:
+        open-in-view: true
+        generate-ddl: true
+        hibernate:
+            ddl-auto: update
+        show-sql: true
+        database-platform: org.hibernate.dialect.H2Dialect
+    h2:
+        console:
+            enabled: true
+            settings.trace: false
+            settings.web-allow-others: false
+
+server:
+    port: 0
+
+logging:
+    level:
+        root: WARN
+        org.springframework.web: DEBUG
+        org.hibernate: INFO
+
+springdoc:
+    api-docs:
+        version: openapi_3_0
+        enabled: true
+    swagger-ui:
+        use-root-path: true
+        path: 'api-docs'
+    show-actuator: true
