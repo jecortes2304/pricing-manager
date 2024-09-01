@@ -1,0 +1,35 @@
+server:
+    port: ${PM_PORT:8080}
+spring:
+    datasource:
+        url: ${PM_H2_URI:jdbc:h2:mem:test_db}
+        username: ${PM_H2_USER:sa}
+        password: ${PM_H2_PASSWORD:''}
+        driver-class-name: org.h2.Driver
+    jpa:
+        open-in-view: true
+        generate-ddl: true
+        hibernate:
+            ddl-auto: update
+        show-sql: true
+        database-platform: org.hibernate.dialect.H2Dialect
+    h2:
+        console:
+            enabled: true
+            settings.trace: false
+            settings.web-allow-others: false
+
+logging:
+    level:
+        root: INFO
+        org.springframework: WARN
+        com.cortestudios.pricingmanager: DEBUG
+    file:
+        name: ${PM_LOG_PATH:/var/log/pricingmanager}/pricingmanager.log
+    pattern:
+        file: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"
+    logback:
+        rollingpolicy:
+            file-name-pattern: ${PM_LOG_PATH:/var/log/pricingmanager}/archived/pricingmanager-%d{yyyy-MM-dd}-%i.log
+            max-file-size: 100MB
+            max-history: 60

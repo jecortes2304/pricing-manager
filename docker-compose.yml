@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    ports:
+      - "8080:8080"
+    env_file:
+      - .env
+    volumes:
+      - .env:/app/.env
+    depends_on:
+      - h2db
+
+  h2db:
+    image: oscarfonts/h2
+    ports:
+      - "1521:1521"
+      - "81:81"
+    env_file:
+      - .env

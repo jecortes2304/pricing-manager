@@ -1,0 +1,23 @@
+### GET all prices with filters
+GET {{baseUrl}}/{{apiV1Url}}/prices/prices/{{productId}}/{{brandId}}?pageSize=5&page=0
+
+###
+# Expected Response
+# 200 OK
+# Content-Type: application/json
+
+### POST request with json body to get a price
+POST {{baseUrl}}/{{apiV1Url}}/prices/price
+Content-Type: application/json
+
+{
+  "productId": {{productId}},
+  "brandId": {{brandId}},
+  "applicationDate": "2020-10-14",
+  "applicationTime": "10:00:00"
+}
+
+###
+# Expected Response
+# 200 OK
+# Content-Type: application/json

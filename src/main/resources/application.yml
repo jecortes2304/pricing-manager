@@ -1,3 +1,16 @@
 spring:
     application:
         name: pricing-manager
+    banner:
+        location: classpath:static/banner.txt
+    profiles:
+        active: @profileActive@
+
+springdoc:
+    api-docs:
+        version: openapi_3_0
+        enabled: true
+    swagger-ui:
+        use-root-path: true
+        path: 'api-docs'
+    show-actuator: true
