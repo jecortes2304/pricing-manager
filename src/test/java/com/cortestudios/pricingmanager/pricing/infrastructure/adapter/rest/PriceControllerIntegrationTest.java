@@ -1,7 +1,5 @@
 package com.cortestudios.pricingmanager.pricing.infrastructure.adapter.rest;
 
-import com.cortestudios.pricingmanager.pricing.infrastructure.dto.request.GetApplicablePriceFilterRequestDTO;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -9,11 +7,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
-
-import java.time.LocalDate;
-import java.time.LocalTime;
-
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import java.time.LocalDateTime;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @ActiveProfiles("test")
@@ -25,21 +20,14 @@ class PriceControllerIntegrationTest {
 
     @Autowired
     private MockMvc mockMvc;
-    @Autowired
-    private ObjectMapper objectMapper;
 
     @Test
     void testGetPriceAt10AMOn14thJune() throws Exception {
-        GetApplicablePriceFilterRequestDTO requestDTO = GetApplicablePriceFilterRequestDTO.builder()
-                .productId(35455L)
-                .brandId(1L)
-                .applicationDate(LocalDate.of(2020, 6, 14))
-                .applicationTime(LocalTime.of(10, 0, 0))
-                .build();
+        Long productId = 35455L;
+        Long brandId = 1L;
+        LocalDateTime applicationDateTime = LocalDateTime.of(2020, 6, 14, 10, 0, 0);
 
-        mockMvc.perform(post(URL)
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(requestDTO)))
+        mockMvc.perform(get(URL + "/{productId}/{brandId}/{applicationDateTime}", productId, brandId, applicationDateTime))
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.result.price").value(35.50));
@@ -47,16 +35,11 @@ class PriceControllerIntegrationTest {
 
     @Test
     void testGetPriceAt4PMOn14thJune() throws Exception {
-        GetApplicablePriceFilterRequestDTO requestDTO = GetApplicablePriceFilterRequestDTO.builder()
-                .productId(35455L)
-                .brandId(1L)
-                .applicationDate(LocalDate.of(2020, 6, 14))
-                .applicationTime(LocalTime.of(16, 0, 0))
-                .build();
+        Long productId = 35455L;
+        Long brandId = 1L;
+        LocalDateTime applicationDateTime = LocalDateTime.of(2020, 6, 14, 16, 0, 0);
 
-        mockMvc.perform(post(URL)
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(requestDTO)))
+        mockMvc.perform(get(URL + "/{productId}/{brandId}/{applicationDateTime}", productId, brandId, applicationDateTime))
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.result.price").value(25.45));
@@ -64,16 +47,11 @@ class PriceControllerIntegrationTest {
 
     @Test
     void testGetPriceAt9PMOn14thJune() throws Exception {
-        GetApplicablePriceFilterRequestDTO requestDTO = GetApplicablePriceFilterRequestDTO.builder()
-                .productId(35455L)
-                .brandId(1L)
-                .applicationDate(LocalDate.of(2020, 6, 14))
-                .applicationTime(LocalTime.of(21, 0, 0))
-                .build();
+        Long productId = 35455L;
+        Long brandId = 1L;
+        LocalDateTime applicationDateTime = LocalDateTime.of(2020, 6, 14, 21, 0, 0);
 
-        mockMvc.perform(post(URL)
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(requestDTO)))
+        mockMvc.perform(get(URL + "/{productId}/{brandId}/{applicationDateTime}", productId, brandId, applicationDateTime))
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.result.price").value(35.50));
@@ -81,16 +59,11 @@ class PriceControllerIntegrationTest {
 
     @Test
     void testGetPriceAt10AMOn15thJune() throws Exception {
-        GetApplicablePriceFilterRequestDTO requestDTO = GetApplicablePriceFilterRequestDTO.builder()
-                .productId(35455L)
-                .brandId(1L)
-                .applicationDate(LocalDate.of(2020, 6, 15))
-                .applicationTime(LocalTime.of(10, 0, 0))
-                .build();
+        Long productId = 35455L;
+        Long brandId = 1L;
+        LocalDateTime applicationDateTime = LocalDateTime.of(2020, 6, 15, 10, 0, 0);
 
-        mockMvc.perform(post(URL)
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(requestDTO)))
+        mockMvc.perform(get(URL + "/{productId}/{brandId}/{applicationDateTime}", productId, brandId, applicationDateTime))
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.result.price").value(30.50));
@@ -98,16 +71,11 @@ class PriceControllerIntegrationTest {
 
     @Test
     void testGetPriceAt9PMOn16thJune() throws Exception {
-        GetApplicablePriceFilterRequestDTO requestDTO = GetApplicablePriceFilterRequestDTO.builder()
-                .productId(35455L)
-                .brandId(1L)
-                .applicationDate(LocalDate.of(2020, 6, 16))
-                .applicationTime(LocalTime.of(21, 0, 0))
-                .build();
+        Long productId = 35455L;
+        Long brandId = 1L;
+        LocalDateTime applicationDateTime = LocalDateTime.of(2020, 6, 16, 21, 0, 0);
 
-        mockMvc.perform(post(URL)
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(requestDTO)))
+        mockMvc.perform(get(URL + "/{productId}/{brandId}/{applicationDateTime}", productId, brandId, applicationDateTime))
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.result.price").value(38.95));
@@ -115,16 +83,11 @@ class PriceControllerIntegrationTest {
 
     @Test
     void testGetPriceAt10AMOn10thJanuary() throws Exception {
-        GetApplicablePriceFilterRequestDTO requestDTO = GetApplicablePriceFilterRequestDTO.builder()
-                .productId(35455L)
-                .brandId(1L)
-                .applicationDate(LocalDate.of(2021, 6, 17))
-                .applicationTime(LocalTime.of(10, 0, 0))
-                .build();
+        Long productId = 35455L;
+        Long brandId = 1L;
+        LocalDateTime applicationDateTime = LocalDateTime.of(2021, 6, 17, 10, 0, 0);
 
-        mockMvc.perform(post(URL)
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(requestDTO)))
+        mockMvc.perform(get(URL + "/{productId}/{brandId}/{applicationDateTime}", productId, brandId, applicationDateTime))
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNotFound())
                 .andExpect(jsonPath("$.errors[0]").value("Price not found"));

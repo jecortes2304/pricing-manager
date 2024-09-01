@@ -11,6 +11,9 @@ COPY src ./src
 # Copy the .env file to the working directory in the Docker container
 COPY .env /app/.env
 
+# Copy the checkstyle.xml file to the working directory in the Docker container
+COPY checkstyle.xml /app/checkstyle.xml
+
 # Install Maven
 RUN apt-get update && apt-get install -y maven
 

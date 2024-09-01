@@ -20,7 +20,7 @@ public class ManyPricesRepositoryAdapter implements ManyPricesRepositoryPort {
 
     @Override
     public Page<Price> findAllPricesByProductAndBrandId(Long productId, Long brandId, Pageable pageable) {
-        Page<PriceEntity> entityPricesPage =  h2JpaPriceRepository
+        Page<PriceEntity> entityPricesPage = h2JpaPriceRepository
                 .findPricesByProductIdAndBrandId(productId, brandId, pageable);
         return entityPricesPage.map(priceAndPriceEntityMapper::reverseMap);
     }
