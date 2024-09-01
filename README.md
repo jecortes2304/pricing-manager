@@ -82,6 +82,13 @@ The project is structured as follows:
 └── README.md                                                       # Project documentation (this file)
 ```
 
+### Running Code Quality Checks with Maven
+Running Code Quality Checks with Maven
+To run Checkstyle with other Maven validations, you can use the following command:
+```bash
+mvn validate
+```
+
 ## Tests
 
 The project includes both unit tests and integration tests:

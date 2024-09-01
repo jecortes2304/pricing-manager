@@ -1,6 +1,5 @@
 package com.cortestudios.pricingmanager.pricing.domain.model;
 
-
 import java.time.LocalDateTime;
 import java.util.Objects;
 
@@ -15,11 +14,15 @@ public class Price {
     private Double price;
     private String currency;
 
-
+    /**
+     *  Empty constructor necessary for the PriceBuilder
+     */
     public Price() {
     }
 
-    public Price(Long brandId, LocalDateTime startDate, LocalDateTime endDate, Long priceList, Long productId, Integer priority, Double price, String currency) {
+    public Price(Long brandId, LocalDateTime startDate, LocalDateTime endDate,
+                 Long priceList, Long productId, Integer priority,
+                 Double price, String currency) {
         this.brandId = brandId;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -29,7 +32,6 @@ public class Price {
         this.price = price;
         this.currency = currency;
     }
-
 
     public Long getBrandId() {
         return brandId;
@@ -95,7 +97,6 @@ public class Price {
         this.currency = currency;
     }
 
-
     @Override
     public String toString() {
         return "Price{" +
@@ -115,14 +116,21 @@ public class Price {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Price price1 = (Price) o;
-        return Objects.equals(brandId, price1.brandId) && Objects.equals(startDate, price1.startDate) && Objects.equals(endDate, price1.endDate) && Objects.equals(priceList, price1.priceList) && Objects.equals(productId, price1.productId) && Objects.equals(priority, price1.priority) && Objects.equals(price, price1.price) && Objects.equals(currency, price1.currency);
+        return Objects.equals(brandId, price1.brandId) &&
+                Objects.equals(startDate, price1.startDate) &&
+                Objects.equals(endDate, price1.endDate) &&
+                Objects.equals(priceList, price1.priceList) &&
+                Objects.equals(productId, price1.productId) &&
+                Objects.equals(priority, price1.priority) &&
+                Objects.equals(price, price1.price) &&
+                Objects.equals(currency, price1.currency);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(brandId, startDate, endDate, priceList, productId, priority, price, currency);
+        return Objects.hash(brandId, startDate, endDate, priceList,
+                productId, priority, price, currency);
     }
-
 
     public static final class PriceBuilder {
         private Long brandId;

@@ -6,8 +6,6 @@ import lombok.experimental.SuperBuilder;
 @Data
 @SuperBuilder
 public abstract class StandardResponse {
-
     private int statusCode;
     private String statusMessage;
-
 }

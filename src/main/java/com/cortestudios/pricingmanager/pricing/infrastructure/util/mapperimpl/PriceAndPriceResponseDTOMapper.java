@@ -1,13 +1,13 @@
 package com.cortestudios.pricingmanager.pricing.infrastructure.util.mapperimpl;
 
 import com.cortestudios.pricingmanager.pricing.domain.model.Price;
-import com.cortestudios.pricingmanager.pricing.infrastructure.adapter.persistence.entity.PriceEntity;
 import com.cortestudios.pricingmanager.pricing.infrastructure.dto.response.PriceResponseDTO;
 import com.cortestudios.pricingmanager.shared.Mapper;
 import org.springframework.stereotype.Component;
 
 @Component
 public class PriceAndPriceResponseDTOMapper implements Mapper<Price, PriceResponseDTO> {
+
     @Override
     public PriceResponseDTO map(Price input) {
         return PriceResponseDTO.builder()
@@ -22,8 +22,8 @@ public class PriceAndPriceResponseDTOMapper implements Mapper<Price, PriceRespon
 
     @Override
     public Price reverseMap(PriceResponseDTO output) {
-        return Price.PriceBuilder.aPrice().
-                withBrandId(output.getBrandId())
+        return Price.PriceBuilder.aPrice()
+                .withBrandId(output.getBrandId())
                 .withStartDate(output.getStartDate())
                 .withEndDate(output.getEndDate())
                 .withProductId(output.getProductId())

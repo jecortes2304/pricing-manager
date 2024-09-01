@@ -37,12 +37,20 @@ public class PriceController {
     @GetMapping(path = "/v1/prices/prices/{productId}/{brandId}", produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "Get list of prices", description = "Get a list of prices by params")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Prices fetched successfully", content = @Content(schema = @Schema(implementation = StandardOkResponsePriceResponseDTOList.class))),
-            @ApiResponse(responseCode = "400", description = "Bad request", content = @Content(schema = @Schema(implementation = StandardErrorResponse.class)))
+            @ApiResponse(responseCode = "200", description = "Prices fetched successfully",
+                    content = @Content(schema = @Schema(implementation = StandardOkResponsePriceResponseDTOList.class))),
+            @ApiResponse(responseCode = "400", description = "Bad request",
+                    content = @Content(schema = @Schema(implementation = StandardErrorResponse.class)))
     })
-    public ResponseEntity<?> getPrices(@PathVariable Long productId, @PathVariable Long brandId, @Min(2) @RequestParam(defaultValue = "2", required = false) Integer pageSize, @Min(0) @RequestParam(defaultValue = "0", required = false) Integer page) {
+    public ResponseEntity<?> getPrices(
+            @PathVariable Long productId,
+            @PathVariable Long brandId,
+            @Min(2) @RequestParam(defaultValue = "2", required = false) Integer pageSize,
+            @Min(0) @RequestParam(defaultValue = "0", required = false) Integer page) {
+
         Pageable paging = PageRequest.of(page, pageSize);
         List<PriceResponseDTO> priceResponseDTOs = priceService.getAllPricesByParams(productId, brandId, paging);
+
         return ResponseEntity.ok(StandardOkResponse.builder()
                 .statusCode(HttpStatus.OK.value())
                 .statusMessage(HttpStatus.OK.getReasonPhrase())
@@ -53,16 +61,21 @@ public class PriceController {
     @PostMapping(path = "/v1/prices/price", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "Get a price", description = "Get a price by params and date")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Prices fetched successfully",  content = @Content(schema = @Schema(implementation = StandardOkResponse.class))),
-            @ApiResponse(responseCode = "400", description = "Bad request", content = @Content(schema = @Schema(implementation = StandardErrorResponse.class))),
-            @ApiResponse(responseCode = "404", description = "Not found", content = @Content(schema = @Schema(implementation = StandardErrorResponse.class)))
+            @ApiResponse(responseCode = "200", description = "Prices fetched successfully",
+                    content = @Content(schema = @Schema(implementation = StandardOkResponse.class))),
+            @ApiResponse(responseCode = "400", description = "Bad request",
+                    content = @Content(schema = @Schema(implementation = StandardErrorResponse.class))),
+            @ApiResponse(responseCode = "404", description = "Not found",
+                    content = @Content(schema = @Schema(implementation = StandardErrorResponse.class)))
     })
     public ResponseEntity<?> getPrice(@Valid @RequestBody GetApplicablePriceFilterRequestDTO getApplicablePriceFilterRequestDTO) {
-        PriceResponseDTO priceResponseDTOs = priceService.getApplicablePrice(getApplicablePriceFilterRequestDTO);
+
+        PriceResponseDTO priceResponseDTO = priceService.getApplicablePrice(getApplicablePriceFilterRequestDTO);
+
         return ResponseEntity.ok(StandardOkResponse.builder()
                 .statusCode(HttpStatus.OK.value())
                 .statusMessage(HttpStatus.OK.getReasonPhrase())
-                .result(priceResponseDTOs)
+                .result(priceResponseDTO)
                 .build());
     }
 }
